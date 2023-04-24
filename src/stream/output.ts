@@ -58,10 +58,12 @@ export const streamAddTimeToFail = async (
           count++;
           return;
         }
-        data[TIME_TO_FAIL_HEADER] = findNearestFailedTime(
-          data[TIMESTAMP_HEADER],
-          sortedErrors
-        );
+        const timeStamp = data[TIMESTAMP_HEADER];
+        const timeToFail = findNearestFailedTime(timeStamp, sortedErrors);
+        if (!timeToFail) {
+          return;
+        }
+        data[TIME_TO_FAIL_HEADER] = timeToFail;
         collection.push(data);
       })
       .on("end", () => {
