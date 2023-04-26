@@ -1,3 +1,5 @@
+# rcie-shopping-file-generator
+
 ### Command to process a file
 
 - Open the terminal
