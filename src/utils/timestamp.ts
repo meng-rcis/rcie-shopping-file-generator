@@ -1,3 +1,5 @@
+import { ERROR_BOUND } from "../constant/bound";
+
 export const findNearestFailedTime = (
   timeStamp: string,
   failedResponse: any[]
@@ -22,10 +24,10 @@ export const findNearestFailedTime = (
     skip++;
   }
 
-  const nearestTimeToFail =
-    skip < failedResponse.length
-      ? (Number(failedResponse[skip].timeStamp) - timeStampInt).toString()
-      : "";
+  if (skip >= failedResponse.length) return "";
 
-  return nearestTimeToFail;
+  const nearestFailTime = Number(failedResponse[skip].timeStamp) - timeStampInt;
+
+  // If the time difference between the metrics log and error time is greater than this value, the metrics log will be considered as a success
+  return nearestFailTime > ERROR_BOUND ? nearestFailTime.toString() : "0";
 };
