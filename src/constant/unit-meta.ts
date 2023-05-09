@@ -32,11 +32,6 @@ export const UNIT_METADATA: IUnit[] = [
     headers: TPS_HEADER,
   },
   {
-    type: MetricType.Latency,
-    unit: UnitType.Millisecond,
-    headers: LATENCY_HEADER,
-  },
-  {
     type: MetricType.Response,
     unit: UnitType.Millisecond,
     headers: RESPONSE_HEADER,
