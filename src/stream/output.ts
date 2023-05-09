@@ -2,7 +2,7 @@ import fs from "fs";
 import csv from "csv-parser";
 // @ts-ignore
 import { parse } from "json2csv";
-import { findNearestFailedTime } from "../utils/timestamp";
+import { findServerStatus } from "../utils/timestamp";
 import {
   TIMESTAMP_HEADER,
   TIME_HEADER,
@@ -59,7 +59,7 @@ export const streamAddTimeToFail = async (
           return;
         }
         const timeStamp = data[TIMESTAMP_HEADER];
-        const timeToFail = findNearestFailedTime(timeStamp, sortedErrors);
+        const timeToFail = findServerStatus(timeStamp, sortedErrors);
         if (!timeToFail) {
           return;
         }

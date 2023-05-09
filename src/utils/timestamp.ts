@@ -1,6 +1,7 @@
 import { ERROR_BOUND } from "../constant/bound";
+import { SEVER_STATUS } from "../constant/status";
 
-export const findNearestFailedTime = (
+export const findServerStatus = (
   timeStamp: string,
   failedResponse: any[]
 ): string => {
@@ -29,5 +30,5 @@ export const findNearestFailedTime = (
   const nearestFailTime = Number(failedResponse[skip].timeStamp) - timeStampInt;
 
   // If the time difference between the metrics log and error time is greater than this value, the metrics log will be considered as a success
-  return nearestFailTime > ERROR_BOUND ? nearestFailTime.toString() : "0";
+  return nearestFailTime > ERROR_BOUND ? SEVER_STATUS.OK : SEVER_STATUS.FAIL;
 };
