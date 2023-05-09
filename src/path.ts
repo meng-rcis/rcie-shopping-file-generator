@@ -6,7 +6,6 @@ import {
   COMBINED_WITH_OUTPUT,
   COMBINED_WITH_OUTPUT_AND_STANDARDIZED_UNIT,
   CPU,
-  LATENCY,
   LOG,
   MEMORY,
   BASE_PATH,
@@ -37,7 +36,6 @@ export const getPath = (): IPath => {
   const memoryFile = `${fileBasePath}${MEMORY}`;
   const networkFile = `${fileBasePath}${NETWORK}`;
   const tpsFile = `${fileBasePath}${TPS}`;
-  const latencyFile = `${fileBasePath}${LATENCY}`;
   const responseFile = `${fileBasePath}${RESPONSE}`;
   const metricsFile = `${fileBasePath}${COMBINED}`;
   const metricsWithOutputFile = `${fileBasePath}${COMBINED_WITH_OUTPUT}`;
@@ -49,7 +47,6 @@ export const getPath = (): IPath => {
     memoryFile,
     networkFile,
     tpsFile,
-    latencyFile,
     responseFile
   );
   if (!isPathExist) {
@@ -62,7 +59,6 @@ export const getPath = (): IPath => {
     memoryFile,
     networkFile,
     tpsFile,
-    latencyFile,
     responseFile,
     metricsFile,
     metricsWithOutputFile,

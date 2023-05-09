@@ -1,6 +1,5 @@
 import {
   CPU_HEADER,
-  LATENCY_HEADER,
   MEM_HEADER,
   NET_HEADER,
   RESPONSE_HEADER,
@@ -17,11 +16,6 @@ export const generateMetrics = (path: IPath): IMetric[] => {
     { type: MetricType.Memory, path: path.memoryFile, headers: MEM_HEADER },
     { type: MetricType.Network, path: path.networkFile, headers: NET_HEADER },
     { type: MetricType.TPS, path: path.tpsFile, headers: TPS_HEADER },
-    {
-      type: MetricType.Latency,
-      path: path.latencyFile,
-      headers: LATENCY_HEADER,
-    },
     {
       type: MetricType.Response,
       path: path.responseFile,

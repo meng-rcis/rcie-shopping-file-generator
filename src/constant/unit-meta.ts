@@ -3,7 +3,6 @@ import { UnitType } from "../enum/unit-type";
 import { IUnit } from "../interfaces/unit";
 import {
   CPU_HEADER,
-  LATENCY_HEADER,
   MEM_HEADER,
   NET_HEADER,
   RESPONSE_HEADER,
