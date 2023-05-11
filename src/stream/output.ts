@@ -6,7 +6,7 @@ import { findServerStatus } from "../utils/timestamp";
 import {
   TIMESTAMP_HEADER,
   TIME_HEADER,
-  TIME_TO_FAIL_HEADER,
+  SEVER_STATUS_HEADER,
 } from "../constant/metrics-header";
 import { LOG_HEADER } from "../constant/log-header";
 import { IMetric } from "../interfaces/metric";
@@ -34,7 +34,7 @@ export const streamGetFailedResponse = async (log: string): Promise<any[]> => {
   });
 };
 
-export const streamAddTimeToFail = async (
+export const streamAddServerStatus = async (
   currentFile: string,
   newFile: string,
   errorResponse: any[],
@@ -59,11 +59,11 @@ export const streamAddTimeToFail = async (
           return;
         }
         const timeStamp = data[TIMESTAMP_HEADER];
-        const timeToFail = findServerStatus(timeStamp, sortedErrors);
-        if (!timeToFail) {
+        const serverStatus = findServerStatus(timeStamp, sortedErrors);
+        if (!serverStatus) {
           return;
         }
-        data[TIME_TO_FAIL_HEADER] = timeToFail;
+        data[SEVER_STATUS_HEADER] = serverStatus;
         collection.push(data);
       })
       .on("end", () => {

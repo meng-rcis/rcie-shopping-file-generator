@@ -7,7 +7,7 @@ import { convertUnit } from "../utils/unit";
 import {
   TIMESTAMP_HEADER,
   TIME_HEADER,
-  TIME_TO_FAIL_HEADER,
+  SEVER_STATUS_HEADER,
 } from "../constant/metrics-header";
 
 export const streamStandardizeUnit = async (
@@ -28,7 +28,7 @@ export const streamStandardizeUnit = async (
             TIME_HEADER,
             TIMESTAMP_HEADER,
             ...metricsHeaders,
-            TIME_TO_FAIL_HEADER,
+            SEVER_STATUS_HEADER,
           ],
         })
       )

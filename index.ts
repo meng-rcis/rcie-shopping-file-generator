@@ -1,4 +1,4 @@
-import { getPath, addTimeToFail, mergeMetrics, generateMetrics } from "./src";
+import { getPath, addServerStatus, mergeMetrics, generateMetrics } from "./src";
 import { standardizeUnit } from "./src/unit";
 
 const main = async () => {
@@ -10,7 +10,7 @@ const main = async () => {
   await mergeMetrics(metrics, path);
 
   console.log("Adding timestamp output to metrics file...");
-  await addTimeToFail(metrics, path);
+  await addServerStatus(metrics, path);
 
   console.log("Standardize unit...");
   await standardizeUnit(path);
