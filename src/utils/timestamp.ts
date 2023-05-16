@@ -25,10 +25,13 @@ export const findServerStatus = (
     skip++;
   }
 
-  if (skip >= failedResponse.length) return "";
+  if (skip === 0) return SEVER_STATUS.OK;
 
-  const nearestFailTime = Number(failedResponse[skip].timeStamp) - timeStampInt;
+  const nearestPreviousFail =
+    timeStampInt - Number(failedResponse[skip - 1].timeStamp);
 
   // If the time difference between the metrics log and error time is greater than this value, the metrics log will be considered as a success
-  return nearestFailTime > ERROR_BOUND ? SEVER_STATUS.OK : SEVER_STATUS.FAIL;
+  return nearestPreviousFail > ERROR_BOUND
+    ? SEVER_STATUS.OK
+    : SEVER_STATUS.FAIL;
 };
