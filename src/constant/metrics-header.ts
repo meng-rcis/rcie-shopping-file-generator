@@ -1,6 +1,6 @@
 export const TIME_HEADER = "Time";
 export const TIMESTAMP_HEADER = "Timestamp";
-export const SEVER_STATUS_HEADER = "ServerStatus";
+export const SEVER_STATUS_HEADER = "status";
 export const CPU_HEADER = [
   "iowait",
   "irq",
