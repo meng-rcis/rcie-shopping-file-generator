@@ -11,7 +11,7 @@ const main = async () => {
   const cli = process.argv;
   const time = cli[2];
   const type = cli[3] || "default";
-  const version = cli[4] || "v1";
+  const version = cli[4] || "v2";
 
   console.log("Generating metrics path...");
   const path = getPath(time, type);
