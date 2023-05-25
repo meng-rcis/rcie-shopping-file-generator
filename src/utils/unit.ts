@@ -61,7 +61,7 @@ const convert = (value: string, desiredUnit: string): string => {
 };
 
 export const convertUnit = (data: any, unitMeta: IUnit[]): any => {
-  const { Time, Timestamp, ServerStatus, ...rest } = data;
+  const { Time, Timestamp, Status, ...rest } = data;
   const timeHeader = "time";
   const timestampHeader = "timestamp [ms]";
   const standardizedRow: any = {
@@ -76,13 +76,13 @@ export const convertUnit = (data: any, unitMeta: IUnit[]): any => {
 
       if (value) {
         const convertedValue = convert(value, unit);
-        const displayedUnit = unit === UnitType.Percentage ? "ratio" : unit;
+        const displayedUnit = unit === UnitType.Percentage ? "ratios" : unit;
         const headerWithUnit = header + " [" + displayedUnit + "]";
         standardizedRow[headerWithUnit] = convertedValue;
       }
     });
   });
 
-  standardizedRow[SEVER_STATUS_HEADER] = ServerStatus;
+  standardizedRow["status"] = Status;
   return standardizedRow;
 };
