@@ -32,3 +32,8 @@ export const LATENCY_HEADER = [
   "latency-95-percentile",
   "latency-99-percentile",
 ];
+export const CPU_HEADER_V2 = ["cpu_usage"];
+export const MEM_HEADER_V2 = ["memory_usage"];
+export const NET_HEADER_V2 = ["bandwidth_inbound", "bandwidth_outbound"];
+export const TPS_HEADER_V2 = ["tps", "tps_error"];
+export const RESPONSE_HEADER_V2 = ["response_time"];

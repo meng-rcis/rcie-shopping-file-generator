@@ -12,13 +12,10 @@ import {
   NETWORK,
   RESPONSE,
   TPS,
+  BANDWIDTH,
 } from "./constant/path";
 
-export const getPath = (): IPath => {
-  const cli = process.argv;
-  const time = cli[2];
-  const type = cli[3] || "default";
-
+export const getPath = (time: string, type: string): IPath => {
   if (!time) {
     throw new Error("Please enter the time of the test");
   }

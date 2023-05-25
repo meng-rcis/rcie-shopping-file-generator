@@ -6,6 +6,7 @@ export const LOG = `api_log${LOG_FILE_TYPE}`;
 export const CPU = `cpu${METRIC_FILE_TYPE}`;
 export const MEMORY = `memory${METRIC_FILE_TYPE}`;
 export const NETWORK = `network${METRIC_FILE_TYPE}`;
+export const BANDWIDTH = `bandwidth${METRIC_FILE_TYPE}`;
 export const TPS = `tps${METRIC_FILE_TYPE}`;
 export const LATENCY = `latency${METRIC_FILE_TYPE}`;
 export const RESPONSE = `response${METRIC_FILE_TYPE}`;

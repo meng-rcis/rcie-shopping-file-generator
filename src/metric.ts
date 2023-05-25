@@ -1,3 +1,4 @@
+import { NETWORK } from "./constant/path";
 import {
   CPU_HEADER,
   MEM_HEADER,
@@ -6,20 +7,25 @@ import {
   TPS_HEADER,
 } from "./constant/metrics-header";
 import { MetricType } from "./enum/metrics-type";
+import { IHeader } from "./interfaces/header";
 import { IMetric } from "./interfaces/metric";
 import { IPath } from "./interfaces/path";
 import { streamMergeMetrics } from "./stream/metric";
 
-export const generateMetrics = (path: IPath): IMetric[] => {
+export const generateMetrics = (path: IPath, header: IHeader): IMetric[] => {
   const metrics: IMetric[] = [
-    { type: MetricType.CPU, path: path.cpuFile, headers: CPU_HEADER },
-    { type: MetricType.Memory, path: path.memoryFile, headers: MEM_HEADER },
-    { type: MetricType.Network, path: path.networkFile, headers: NET_HEADER },
-    { type: MetricType.TPS, path: path.tpsFile, headers: TPS_HEADER },
+    { type: MetricType.CPU, path: path.cpuFile, headers: header.CPU },
+    { type: MetricType.Memory, path: path.memoryFile, headers: header.MEMORY },
+    {
+      type: MetricType.Network,
+      path: path.networkFile,
+      headers: header.NETWORK,
+    },
+    { type: MetricType.TPS, path: path.tpsFile, headers: header.TPS },
     {
       type: MetricType.Response,
       path: path.responseFile,
-      headers: RESPONSE_HEADER,
+      headers: header.RESPONSE,
     },
   ];
   return metrics;

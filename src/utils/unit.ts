@@ -1,3 +1,4 @@
+import { SEVER_STATUS_HEADER } from "../constant/metrics-header";
 import { UnitType } from "../enum/unit-type";
 import { IUnit } from "../interfaces/unit";
 
@@ -61,8 +62,12 @@ const convert = (value: string, desiredUnit: string): string => {
 
 export const convertUnit = (data: any, unitMeta: IUnit[]): any => {
   const { Time, Timestamp, ServerStatus, ...rest } = data;
-  const timestampHeader = "Timestamp [ms]";
-  const standardizedRow: any = { Time, [timestampHeader]: Timestamp };
+  const timeHeader = "time";
+  const timestampHeader = "timestamp [ms]";
+  const standardizedRow: any = {
+    [timeHeader]: Time,
+    [timestampHeader]: Timestamp,
+  };
 
   unitMeta.forEach((meta) => {
     const { headers, unit } = meta;
@@ -71,14 +76,13 @@ export const convertUnit = (data: any, unitMeta: IUnit[]): any => {
 
       if (value) {
         const convertedValue = convert(value, unit);
-        const displayedUnit = unit === UnitType.Percentage ? "Ratios" : unit;
+        const displayedUnit = unit === UnitType.Percentage ? "ratio" : unit;
         const headerWithUnit = header + " [" + displayedUnit + "]";
         standardizedRow[headerWithUnit] = convertedValue;
       }
     });
   });
 
-  const outputHeader = "ServerStatus";
-  standardizedRow[outputHeader] = ServerStatus;
+  standardizedRow[SEVER_STATUS_HEADER] = ServerStatus;
   return standardizedRow;
 };
