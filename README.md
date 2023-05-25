@@ -13,3 +13,13 @@
 Example: `npm start 2019-01-01_12-00-00 5`
 
 NOTE: api type is optional, if not specified, the default value is 'default'
+
+### File Preparation
+
+System metrics files (retrieved from Grafana) should be saved at ../rcie-system-metrics-data/<yyyy-mm-dd_hh-mm-ss> folder with the following file name:
+
+- cpu.csv
+- memory.csv
+- network.csv
+- response.csv
+- tps.csv
