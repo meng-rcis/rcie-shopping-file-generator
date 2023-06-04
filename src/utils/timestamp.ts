@@ -3,32 +3,21 @@ import { SEVER_STATUS } from "../constant/status";
 
 export const findServerStatus = (
   timeStamp: string,
-  failedResponse: any[]
+  errorResponses: any[]
 ): string => {
-  const isTimeStampValid =
-    Number(failedResponse[failedResponse.length - 1].timeStamp) >=
-    Number(timeStamp);
+  const currentTime = Number(timeStamp);
+  let errorIndex = 0;
 
-  if (!isTimeStampValid) {
-    return "";
+  for (let i = 0; i < errorResponses.length; i++) {
+    const errorTime = Number(errorResponses[i].timeStamp);
+    const isErrorTimeReachCurrentTime = errorTime >= currentTime;
+    if (isErrorTimeReachCurrentTime) break;
+    errorIndex++;
   }
 
-  const timeStampInt = Number(timeStamp);
-  let skip = 0;
-
-  for (let i = 0; i < failedResponse.length; i++) {
-    const error = failedResponse[i];
-    const isTimeStampBigger = timeStampInt > Number(error.timeStamp);
-    if (!isTimeStampBigger) {
-      break;
-    }
-    skip++;
-  }
-
-  if (skip === 0) return SEVER_STATUS.OK;
-
-  const nearestPreviousFail =
-    timeStampInt - Number(failedResponse[skip - 1].timeStamp);
+  if (errorIndex === 0) return SEVER_STATUS.OK;
+  const previousErrorTime = Number(errorResponses[errorIndex - 1].timeStamp);
+  const nearestPreviousFail = currentTime - previousErrorTime;
 
   // If the time difference between the metrics log and error time is greater than this value, the metrics log will be considered as a success
   return nearestPreviousFail > ERROR_BOUND

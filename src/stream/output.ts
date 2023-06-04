@@ -60,7 +60,7 @@ export const streamAddServerStatus = async (
         }
         const timeStamp = data[TIMESTAMP_HEADER];
         const serverStatus = findServerStatus(timeStamp, sortedErrors);
-        if (!serverStatus) {
+        if (serverStatus === "") {
           return;
         }
         data[SEVER_STATUS_HEADER] = serverStatus;
