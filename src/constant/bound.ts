@@ -1,1 +1,1 @@
-export const ERROR_BOUND = 5000; // Milliseconds
+export const ERROR_BOUND = 10000; // Milliseconds
