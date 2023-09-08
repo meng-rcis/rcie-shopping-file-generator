@@ -23,3 +23,5 @@ System metrics files (retrieved from Grafana) should be saved at ../rcie-system-
 - network.csv
 - response.csv
 - tps.csv
+
+or see at repo, https://github.com/nuttchai/rcie-system-metrics-data
