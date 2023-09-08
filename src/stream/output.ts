@@ -2,7 +2,6 @@ import fs from "fs";
 import csv from "csv-parser";
 // @ts-ignore
 import { parse } from "json2csv";
-import { findServerStatus } from "../utils/timestamp";
 import {
   TIMESTAMP_HEADER,
   TIME_HEADER,
@@ -39,13 +38,11 @@ export const streamGetFailedResponse = async (log: string): Promise<any[]> => {
 export const streamAddServerStatus = async (
   currentFile: string,
   newFile: string,
-  errorResponse: any[],
   metrics: IMetric[]
 ): Promise<void> => {
   let count = 0;
   const collection: any[] = [];
   const metricsHeaders = metrics.flatMap((metric) => metric.headers);
-  const sortedErrors = errorResponse.sort((a, b) => a.timeStamp - b.timeStamp);
 
   return new Promise(function (resolve, reject) {
     fs.createReadStream(currentFile)
@@ -60,7 +57,6 @@ export const streamAddServerStatus = async (
           count++;
           return;
         }
-        const timeStamp = data[TIMESTAMP_HEADER];
         const tpsError = data[TPS_HEADER_V2[1]];
         const serverStatus =
           tpsError === "0 req/s" ? SEVER_STATUS.OK : SEVER_STATUS.FAIL; // Valid only V2
