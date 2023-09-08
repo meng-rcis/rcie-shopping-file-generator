@@ -7,9 +7,11 @@ import {
   TIMESTAMP_HEADER,
   TIME_HEADER,
   SEVER_STATUS_HEADER,
+  TPS_HEADER_V2,
 } from "../constant/metrics-header";
 import { LOG_HEADER } from "../constant/log-header";
 import { IMetric } from "../interfaces/metric";
+import { SEVER_STATUS } from "../constant/status";
 
 export const streamGetFailedResponse = async (log: string): Promise<any[]> => {
   let countLog = 0;
@@ -59,10 +61,13 @@ export const streamAddServerStatus = async (
           return;
         }
         const timeStamp = data[TIMESTAMP_HEADER];
-        const serverStatus = findServerStatus(timeStamp, sortedErrors);
-        if (serverStatus === "") {
-          return;
-        }
+        const tpsError = data[TPS_HEADER_V2[1]];
+        const serverStatus =
+          tpsError === "0 req/s" ? SEVER_STATUS.OK : SEVER_STATUS.FAIL; // Valid only V2
+        // const serverStatus = findServerStatus(timeStamp, sortedErrors);
+        // if (serverStatus === "") {
+        //   return;
+        // }
         data[SEVER_STATUS_HEADER] = serverStatus;
         collection.push(data);
       })

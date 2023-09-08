@@ -12,7 +12,6 @@ import {
   NETWORK,
   RESPONSE,
   TPS,
-  BANDWIDTH,
 } from "./constant/path";
 
 export const getPath = (time: string, type: string): IPath => {
@@ -39,7 +38,6 @@ export const getPath = (time: string, type: string): IPath => {
   const metricsWithOutputAndStandardizedUnitFile = `${fileBasePath}${COMBINED_WITH_OUTPUT_AND_STANDARDIZED_UNIT}`;
 
   const isPathExist = verifyPath(
-    logFile,
     cpuFile,
     memoryFile,
     networkFile,
